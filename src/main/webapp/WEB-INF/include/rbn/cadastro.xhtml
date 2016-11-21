@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        <p:fieldset legend="Rede Boas Novas" style="width: 300px">
+            <h:panelGrid columns="1" id="formulario" style="margin-bottom: 10px">
+                <p:outputLabel value="Valor" for="valor"/>
+                <p:inputNumber id="valor" value="#{rbnController.rbn.valor}" size="15"
+                               symbol="R$ " decimalSeparator="," thousandSeparator="." minValue="5"
+                               decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor"/>
+                
+                <p:outputLabel value="Data do lançamento" for="dtRbn"/>
+                <p:calendar id="dtRbn" value="#{rbnController.rbn.dataLancamento}"
+                            locale="pt" mask="true" pattern="dd/MM/yyyy" disabled="false"
+                            size="10" required="true" requiredMessage="Informe uma data"/>
+                
+                <p:outputLabel value="Nome da Campanha" for="campanha"/>
+                <p:inputText id="campanha" size="30" value="#{rbnController.rbn.descricao}"
+                             required="true" requiredMessage="Nome da campanha precisa ser informado"/>
+                
+                <p:outputLabel value="Contribuinte" for="contribuinte"/>
+                <p:selectOneMenu id="contribuinte" value="#{rbnController.rbn.membro}" converter="#{membroConverter}" required="true" requiredMessage="Escolha um membro">
+                    <f:selectItem itemLabel="Selecione"/>
+                    <f:selectItems value="#{membroController.membros}" var="membro" itemLabel="#{membro.nome}" itemValue="#{membro}"/>
+                </p:selectOneMenu>
+            </h:panelGrid>
+            <p:commandButton style="margin-right: 5px" value="Salvar" action="#{rbnController.salvar()}" update="rbnTable formulario"/>
+            <p:commandButton value="Confirmar Pagamento" action="#{rbnController.confirmarPagamento()}" update="rbnTable formulario"/>
+        </p:fieldset>
+    </ui:composition>
+
+</html>

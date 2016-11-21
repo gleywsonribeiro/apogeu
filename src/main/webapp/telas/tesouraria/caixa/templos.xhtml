@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns="http://www.w3.org/1999/xhtml" 
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form id="formulario">
+            <p:growl id="mensagens"/>
+            <p:dataTable id="templos" value="#{lancamentoCaixaController.templos}" paginatorAlwaysVisible="false"
+                         paginatorPosition="bottom" selectionMode="single" selection="#{lancamentoCaixaController.templo}" rowKey="#{templo.id}"
+                         var="templo" style="width: 400px" emptyMessage="Não há registros." paginator="true" rows="5">
+                <f:facet name="header">
+                    Abertura de caixa - Templos
+                </f:facet>
+
+                <p:ajax event="rowSelect" listener="#{lancamentoCaixaController.atualizaLista()}" update=":formulario:tableLancamentos"/>
+                <!--<p:ajax event="rowUnselect" update=":formulario:tableLancamentos"/>-->
+
+                <p:column headerText="Código" style="text-align: right; width: 50px">
+                    <h:outputText value="#{templo.id}"/>
+                </p:column>
+                <p:column headerText="Templo" >
+                    <h:outputText value="#{templo.nome}"/>
+                </p:column>
+
+                <p:column>
+                    <p:commandButton disabled="#{lancamentoCaixaController.templo eq null}" value="Abrir caixa" icon="fa fa-dollar" onclick="PF('dlgLancamento').show(); return false" update="formulario:dialog">
+                        <f:setPropertyActionListener target="#{lancamentoCaixaController.templo}" value="#{templo}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+
+            <p:dataTable id="tableLancamentos" style="width: 900px; margin-top: 10px" value="#{lancamentoCaixaController.lancamentos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="lancamento" emptyMessage="Não há registros." paginator="true" rows="5">
+                <f:facet name="header">
+                    Controle de Caixa - Lançamentos
+                </f:facet>
+
+                <p:column headerText="Código">
+                    <h:outputText value="#{lancamento.id}"/>
+                </p:column>
+                <p:column headerText="Data de Lançamento">
+                    <h:outputText value="#{lancamento.dataLancamento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Valor de Entrada">
+                    <h:outputText value="#{lancamento.valorEntrada}" style="color: dodgerblue">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Valor de Saída">
+                    <h:outputText value="#{lancamento.valorSaida}" style="color: orangered">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Descrição do Caixa">
+                    <h:outputText value="#{lancamento.descricao}"/>
+                </p:column>
+                <p:column headerText="Templo">
+                    <h:outputText value="#{lancamento.templo.nome}"/>
+                </p:column>
+
+            </p:dataTable>
+
+            <p:dialog widgetVar="dlgLancamento" id="dialog">
+                <h:panelGroup id="formLancamento">
+                    <h:panelGrid columns="1" style="clear: left; float: left">
+                        <p:outputLabel value="Data do lançamento" for="lancamento" />
+                        <p:calendar id="lancamento" size="12" locale="pt" mask="true"
+                                    pattern="dd/MM/yyyy" required="true" requiredMessage="Data deve ser informada"
+                                    value="#{lancamentoCaixaController.lancamento.dataLancamento}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="clear: left; float: left">
+                        <p:outputLabel value="Valor da Entrada" for="entrada"/>
+                        <p:inputNumber id="entrada" value="#{lancamentoCaixaController.lancamento.valorEntrada}" size="15"
+                                       symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor da entrada"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Valor de saída" for="saida"/>
+                        <p:inputNumber id="saida" value="#{lancamentoCaixaController.lancamento.valorSaida}" size="15"
+                                       symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor da saída"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="clear: left;">
+                        <p:outputLabel value="Centro de Custo" for="custo"/>
+                        <p:selectOneMenu id="custo">
+                            <f:selectItem itemLabel="Selecione"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="margin-bottom: 5px">
+                        <p:outputLabel value="Descrição" for="descricao"/>
+                        <p:inputText id="descricao" size="20" value="#{lancamentoCaixaController.lancamento.descricao}" required="true" requiredMessage="Descrição é necessária"/>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Imprimir Recibo" style="margin-right: 5px"/>
+                    <p:commandButton value="Imprimir Caixa" style="margin-right: 5px"/>
+                    <p:commandButton value="Salvar" action="#{lancamentoCaixaController.salvar()}" update="formLancamento tableLancamentos :formulario:mensagens" style="margin-right: 5px"/>
+                </h:panelGroup>
+            </p:dialog>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

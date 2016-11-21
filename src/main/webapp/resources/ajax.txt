@@ -1,0 +1,19 @@
+Apagar este aqrquivo depois
+
+<p:outputLabel class="required" value="Tipo de Pessoa:" for="tipo" />
+<h:panelGroup>
+  <p:selectOneRadio id="tipo" value="#{cadastroClienteBean.cliente.tipo}">
+    <f:selectItems value="#{cadastroClienteBean.tiposPessoas}" var="tipoPessoa" itemValue="#{tipoPessoa}" itemLabel="#{tipoPessoa.descricao}" />
+    <p:ajax event="change" update="grupoLabel, grupoInput" process="@this" />
+  </p:selectOneRadio>
+</h:panelGroup>
+
+<h:panelGroup id="grupoLabel">
+  <p:outputLabel class="required" value="CPF:" for="cpf" rendered="#{cadastroClienteBean.cliente.tipo eq 'FISICA'}" />
+  <p:outputLabel class="required" value="CNPJ:" for="cnpj" rendered="#{cadastroClienteBean.cliente.tipo eq 'JURIDICA'}" />
+</h:panelGroup>
+
+<h:panelGroup id="grupoInput">
+  <p:inputMask mask="999.999.999-99" value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" id="cpf" rendered="#{cadastroClienteBean.cliente.tipo eq 'FISICA'}" style="width: 50%" />
+  <p:inputMask mask="99.999.999/9999-99" value="#{cadastroClienteBean.cliente.documentoReceitaFederal}" id="cnpj" rendered="#{cadastroClienteBean.cliente.tipo eq 'JURIDICA'}" style="width: 60%" />
+</h:panelGroup>

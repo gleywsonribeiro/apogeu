@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet library="css" name="layout.css"/>
+        <h:outputScript library="scripts" name="calendario.js"/>
+        <title><ui:insert name="titulo">Apogeu - Sistema de Gestão de Igrejas</ui:insert></title>
+    </h:head>
+
+    <h:body>
+        <!--<p:growl autoUpdate="true"/>-->
+        <p:ajaxStatus onstart="PF('statusDialog').show()" onsuccess="PF('statusDialog').hide()" />
+        <p:dialog widgetVar="statusDialog" modal="true" draggable="false" closable="false" resizable="false" showHeader="false">
+            <center>
+                <h:outputText value="Carregando..."/><br/>
+            </center>
+            <p:graphicImage library="imagens" name="ajax-loader.gif"/>
+        </p:dialog>
+        <p:layout fullPage="true">
+            <p:layoutUnit position="north" size="75" header="Apogeu - Sistema de Gestão de Igrejas">
+                <ui:include src="menu.xhtml"/>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="south" size="25">
+                <ui:insert name="footer">
+                    &copy;
+                    <h:outputText value="Copyright. SGI - Sistema de Gestão de Igrejas. Todos os direitos reservados" style="font-size: 10px"/>
+                </ui:insert>
+            </p:layoutUnit>
+
+            <p:layoutUnit position="center">
+                <ui:insert name="body"/>
+            </p:layoutUnit>
+
+        </p:layout>
+    </h:body>
+</html>

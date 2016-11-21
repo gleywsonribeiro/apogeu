@@ -1,0 +1,107 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form id="formulario">
+            <p:growl id="messages"/>
+
+            <p:fieldset legend="#{contaPagarController.templo.nome}" style="width: 500px">
+                <h:panelGroup id="formLancamento" style="float: left">
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Código" for="codigo"/>
+                        <p:inputText id="codigo" size="5" disabled="true" value="#{contaPagarController.conta.id}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Vencimento" for="vencimento" />
+                        <p:calendar id="vencimento" size="12" locale="pt" mask="true"
+                                    pattern="dd/MM/yyyy" required="true" requiredMessage="Data deve ser informada"
+                                    value="#{contaPagarController.conta.vencimento}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Fornecedor" for="fornecedor"/>
+                        <p:selectOneMenu id="fornecedor">
+                            <f:selectItem itemLabel="Selecione"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="clear: left; float: left">
+                        <p:outputLabel value="Nº documento" for="documento"/>
+                        <p:inputText id="documento" size="20" value="#{contaPagarController.conta.numeroDocumento}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Tipo de pagamento" for="tpPagamento"/>
+                        <p:selectOneMenu id="tpPagamento" required="true" style="width: 100px" value="#{contaPagarController.conta.tipoPagamento}">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItems value="#{contaPagarController.formasPagamento}"
+                                           var="pagamento" itemLabel="#{pagamento.descricao}" itemValue="#{pagamento}"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Valor documento" for="valor"/>
+                        <p:inputNumber id="valor" size="15" value="#{contaPagarController.conta.valor}"
+                                       symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor do documento"/>
+                    </h:panelGrid>
+                </h:panelGroup>
+
+
+            </p:fieldset>
+            <p:commandButton value="salvar" update="messages formLancamento contas" action="#{contaPagarController.salvar()}"/>
+            <p:commandButton value="Confirmar pagamento" update="formLancamento contas messages" style="margin-left: 5px" action="#{contaPagarController.pagar()}"/>
+            <p:commandButton value="Sair" style="margin-left: 5px" action="#{contaPagarController.sair()}" immediate="true"/>
+            
+            <p:dataTable id="contas" style="width: 900px; margin-top: 10px" value="#{contaPagarController.contas}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="conta" emptyMessage="Não há registros." paginator="true" rows="5"
+                         rowStyleClass="#{conta.dataPagamento eq null ? 'pendente':'pago'}">
+                <f:facet name="header">
+                    Contas
+                </f:facet>
+
+                <p:column headerText="Código">
+                    <h:outputText value="#{conta.id}"/>
+                </p:column>
+
+                <p:column headerText="Vencimento">
+                    <h:outputText value="#{conta.vencimento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Fornecedor">
+                    <h:outputText value="#{conta.fornecedor.nome}"/>
+                </p:column>
+
+                <p:column headerText="Nº documento">
+                    <h:outputText value="#{conta.numeroDocumento}"/>
+                </p:column>
+
+                <p:column headerText="Tipo Pagamento">
+                    <h:outputText value="#{conta.tipoPagamento.descricao}"/>
+                </p:column>
+
+                <p:column headerText="Valor">
+                    <h:outputText value="#{conta.valor}">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Pagamento">
+                    <h:outputText value="#{conta.dataPagamento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

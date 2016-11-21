@@ -1,0 +1,34 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl id="messages"/>
+            <p:dataTable id="templos" value="#{lancamentoFinanceiroController.templos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="templo" style="width: 400px" emptyMessage="Não há registros." paginator="true" rows="5">
+                <f:facet name="header">
+                     Lançamentos Financeiros - Templos
+                </f:facet>
+                <p:column headerText="Código" style="text-align: right; width: 50px">
+                    <h:outputText value="#{templo.id}"/>
+                </p:column>
+                <p:column headerText="Templo" >
+                    <h:outputText value="#{templo.nome}"/>
+                </p:column>
+
+                <p:column style="width: 50px; text-align: center">
+                    <p:commandButton title="Fazer Lançamento" icon="ui-apogeu-save" action="lancamentoFinanceiro?faces-redirect=true">
+                        <f:setPropertyActionListener target="#{lancamentoFinanceiroController.templo}" value="#{templo}"/>
+                    </p:commandButton>
+                    
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

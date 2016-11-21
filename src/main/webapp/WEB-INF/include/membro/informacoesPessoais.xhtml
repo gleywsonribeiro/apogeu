@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        <h:panelGroup style="float: left">
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Código" for="codigo"/>
+                <p:inputText id="codigo" size="5" disabled="true" value="#{membroController.membro.id}"/>
+            </h:panelGrid>
+            
+            
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Data do cadastro" for="dataCadastro"/>
+                <p:calendar id="dataCadastro" pattern="dd/MM/yyyy" size="12" disabled="true" value="#{membroController.membro.dataCadastro}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Registro Geral" for="registroGeral"/>
+                <p:inputText id="registroGeral" size="10" value="#{membroController.membro.rgEclesiastico}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Nome" for="nome"/>
+                <p:inputText id="nome" size="63" required="true" value="#{membroController.membro.nome}"/>
+            </h:panelGrid>
+            
+            <h:panelGrid style="clear: left; float: left">
+                <p:outputLabel value="Sexo" for="sexo"/>
+                <p:selectOneRadio id="sexo" required="true" value="#{membroController.membro.sexo}">
+                    <f:selectItems value="#{membroController.sexos}" var="sexo"
+                                   itemValue="#{sexo}"/>
+                </p:selectOneRadio>
+            </h:panelGrid>
+            
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Data do nascimento" for="dataNascimento"/>
+                <p:calendar id="dataNascimento" pattern="dd/MM/yyyy" size="14" required="true" locale="pt" navigator="true" mask="true" value="#{membroController.membro.dataNascimento}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Estado Civil" for="estadoCivil"/>
+                <p:selectOneMenu id="estadoCivil" value="#{membroController.membro.estadoCivil}">
+                    <f:selectItem itemLabel="Selecione"/>
+                    <f:selectItems value="#{membroController.estadosCivis}" var="estado"
+                                   itemLabel="#{estado.descricao}" itemValue="#{estado}"/>
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Nome do cônjuge" for="nomeConjuge"/>
+                <p:inputText id="nomeConjuge" size="55" value="#{membroController.membro.conjuge}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="clear: left; float: left">
+                <p:outputLabel value="Nacionalidade" for="nacionalidade"/>
+                <p:inputText id="nacionalidade" size="10" value="#{membroController.membro.nacionalidade}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Naturalidade" for="naturalidade"/>
+                <p:inputText id="naturalidade" size="10"  value="#{membroController.membro.naturalidade}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Telefone" for="telefone"/>
+                <p:inputMask mask="(99)9999-9999" id="telefone" size="15"  value="#{membroController.membro.contato.telefone}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Celular" for="celular"/>
+                <p:inputMask mask="(99)99999-9999" id="celular" size="15"  value="#{membroController.membro.contato.celular}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="E-mail" for="email"/>
+                <p:inputText id="email" size="35"  value="#{membroController.membro.contato.email}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="clear: left; float: left">
+                <p:outputLabel value="Nome do pai" for="pai"/>
+                <p:inputText id="pai" size="40"  value="#{membroController.membro.nomePai}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Nome do mãe" for="mae"/>
+                <p:inputText id="mae" size="40"  value="#{membroController.membro.nomeMae}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Escolaridade" for="escolaridade"/>
+                <p:selectOneMenu id="escolaridade"  value="#{membroController.membro.escolaridade}">
+                    <f:selectItem itemLabel="Selecione"/>
+                    <f:selectItems value="#{membroController.escolaridades}" var="escolaridade"
+                                   itemValue="#{escolaridade}" itemLabel="#{escolaridade.descricao}"/>
+                </p:selectOneMenu>
+            </h:panelGrid>
+
+
+        </h:panelGroup>
+    </ui:composition>
+
+</html>

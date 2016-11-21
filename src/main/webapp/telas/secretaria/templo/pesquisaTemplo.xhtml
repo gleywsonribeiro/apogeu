@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form>
+            <f:metadata>
+                <f:event listener="#{temploController.beginConversation()}" type="preRenderView" />
+            </f:metadata>
+            <p:toolbar>
+                <p:toolbarGroup>
+                    <p:commandButton value="Pesquisar"/>
+                </p:toolbarGroup>
+                <p:toolbarGroup align="right">
+                    <p:button value="Novo" outcome="cadastroTemplo"/>
+                </p:toolbarGroup>
+            </p:toolbar>
+            <h:panelGrid id="painel" columns="2" style="margin-top: 5px;">
+                <p:outputLabel value="Código" for="codigo"/>
+                <p:inputText id="codigo" size="5"/>
+
+                <p:outputLabel value="Nome do Templo" for="nome"/>
+                <p:inputText id="nome" size="60"/>
+            </h:panelGrid>
+
+            <p:dataTable id="temploTable" value="#{temploController.templos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="templo" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+                <p:column headerText="Código" style="text-align: center; width: 100px">
+                    <h:outputText value="#{templo.id}"/>
+                </p:column>
+                <p:column headerText="Templo">
+                    <h:outputText value="#{templo.nome}"/>
+                </p:column>
+                <p:column headerText="Sede">
+                    <h:outputText value="#{templo.sede.nome}"/>
+                </p:column>
+                <p:column headerText="Responsavel">
+                    <h:outputText value="#{templo.responsavel.nome}"/>
+                </p:column>
+                <p:column style="width: 100px; text-align: center">
+                    <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroTemplo">
+                        <f:setPropertyActionListener target="#{temploController.templo}" value="#{templo}"/>
+                    </p:commandButton>
+                    <p:commandButton icon="ui-icon-trash" title="Excluir" update="temploTable" action="#{temploController.remover()}">
+                        <p:confirm header="Exclusão de Templo" message="Tem certeza que deseja excluir o Templo #{templo.nome}?" icon="ui-icon-alert"/>
+                        <f:setPropertyActionListener target="#{temploController.templo}" value="#{templo}"/>
+                    </p:commandButton>                
+                </p:column>
+            </p:dataTable>
+
+            <p:confirmDialog global="true">  
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

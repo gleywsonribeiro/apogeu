@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Tipo de membro" for="tpMembro"/>
+            <p:selectOneMenu id="tpMembro">
+                <f:selectItem itemLabel="Selecione"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Evangélico" for="evangelico"/>
+            <p:selectBooleanCheckbox id="evangelico" value="#{membroController.membro.evangelico}">
+                <p:ajax update="dataConversao"/>
+            </p:selectBooleanCheckbox>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Data da conversão" for="dataConversao"/>
+            <p:calendar id="dataConversao" pattern="dd/MM/yyyy" size="12" locale="pt" navigator="true" mask="true" disabled="#{membroController.membro.evangelico eq false}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Consagrado" for="consagrado"/>
+            <p:selectBooleanCheckbox id="consagrado" value="#{membroController.membro.consagrado}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Ministério" for="ministerio"/>
+            <p:selectBooleanCheckbox id="ministerio" value="#{membroController.membro.ministerio}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Batismo nas águas" for="batismoAguas"/>
+            <p:selectBooleanCheckbox id="batismoAguas" value="#{membroController.membro.batizadoAguas}">
+                <p:ajax update="dataBatismo"/>
+            </p:selectBooleanCheckbox>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Data do Batismo" for="dataBatismo"/>
+            <p:calendar id="dataBatismo" size="10" pattern="dd/MM/yyyy" locale="pt" navigator="true" mask="true" disabled="#{membroController.membro.batizadoAguas eq false}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="clear: left; float: left; margin-left: 5px;">
+            <p:outputLabel value="Batismo E. Santo" for="batismoES"/>
+            <p:selectBooleanCheckbox id="batismoES" value="#{membroController.membro.batizadoEspiritoSanto}">
+                <p:ajax update="dataBatismoEP"/>
+            </p:selectBooleanCheckbox>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Data do Batismo E. Santo" for="dataBatismoEP"/>
+            <p:calendar id="dataBatismoEP" size="18" pattern="dd/MM/yyyy" locale="pt" navigator="true" mask="true" disabled="#{membroController.membro.batizadoEspiritoSanto eq false}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Forma de admissão" for="formaAdmissao"/>
+            <p:selectOneMenu id="formaAdmissao" value="#{membroController.membro.admissao}" converter="#{admissaoConverter}">
+                <f:selectItem itemLabel="Selecione"/>
+                <f:selectItems value="#{admissaoController.admissoes}" var="admissao" itemLabel="#{admissao.tpAdmissao}" itemValue="#{admissao}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Data da Admissão" for="dataAdmissao"/>
+            <p:calendar id="dataAdmissao" size="12" pattern="dd/MM/yyyy" locale="pt" navigator="true" mask="true" value="#{membroController.membro.dataAdmissao}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Situação do membro" for="situacaoMembro"/>
+            <p:selectOneMenu id="situacaoMembro" value="#{membroController.membro.situacao}" converter="#{situacaoConverter}">
+                <f:selectItem itemLabel="Selecione"/>
+                <f:selectItems value="#{situacaoController.situacoes}" var="situacao" itemLabel="#{situacao.nome}" itemValue="#{situacao}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="clear: left; float: left; margin-left: 5px;">
+            <p:outputLabel value="Falecido" for="falecido"/>
+            <p:selectBooleanCheckbox id="falecido" value="#{membroController.membro.falecido}">
+                <p:ajax update="datafalecimento"/>
+            </p:selectBooleanCheckbox>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Data do falecimento" for="datafalecimento"/>
+            <p:calendar id="datafalecimento" size="15" pattern="dd/MM/yyyy" locale="pt" navigator="true" mask="true" disabled="#{membroController.membro.falecido eq false}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Data Vencimento carteira" for="dataVencimentoCarteira"/>
+            <p:calendar id="dataVencimentoCarteira" pattern="dd/MM/yyyy" size="18" locale="pt" navigator="true" mask="true" value="#{membroController.membro.dataVencimentoCarteira}"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Cargo Eclesiástico" for="cargoEclesiastico"/>
+            <p:selectOneMenu id="cargoEclesiastico" value="#{membroController.membro.cargo}" converter="#{cargoConverter}">
+                <f:selectItem itemLabel="Selecione"/>
+                <f:selectItems value="#{cargoController.cargos}" var="cargo" itemLabel="#{cargo.nome}" itemValue="#{cargo}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Função" for="funcao"/>
+            <p:selectOneMenu id="funcao" value="#{membroController.membro.funcao}" converter="#{funcaoConverter}">
+                <f:selectItem itemLabel="Selecione"/>
+                <f:selectItems value="#{funcaoController.funcoes}" var="funcao" itemLabel="#{funcao.nome}" itemValue="#{funcao}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Grupo de integração" for="grupoIntegracao"/>
+            <p:selectOneMenu id="grupoIntegracao" value="#{membroController.membro.integracao}" converter="#{grupoIntegracaoConverter}">
+                <f:selectItem itemLabel="Selecione"/>
+                <f:selectItems value="#{integracaoController.integracoes}" var="grupo" itemLabel="#{grupo.nomeGrupo}" itemValue="#{grupo}"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="clear: left; float: left; margin-left: 5px;">
+            <p:outputLabel value="EBD" for="ebd"/>
+            <p:selectBooleanCheckbox id="ebd"/>
+        </h:panelGrid>
+
+        <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
+            <p:outputLabel value="Classe da EBD" for="classeEBD"/>
+            <p:selectOneMenu id="classeEBD">
+                <f:selectItem itemLabel="Selecione"/>
+            </p:selectOneMenu>
+        </h:panelGrid>
+    </ui:composition>
+
+</html>

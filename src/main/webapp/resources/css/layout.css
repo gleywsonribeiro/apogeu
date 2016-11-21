@@ -1,0 +1,63 @@
+@charset "utf-8";
+
+.ui-widget, .ui-state-default {
+    font-size: 12px !important;
+}
+.ui-layout-north {
+    z-index: 20 !important;
+    overflow: visible !important;;
+}
+.ui-layout-north .ui-layout-unit-content {
+    overflow: visible !important;
+}
+.ui-widget-header {
+    text-align: center;
+    /*text-transform: uppercase;*/
+}
+
+.negrito {
+    font-weight: bold;
+}
+.ui-datatable-data {
+    font-size: 13px !important;
+}
+.pendente {
+    /*background-color: crimson;*/
+    color: red;
+}
+
+.pago{
+    /*background-color: green;*/ 
+    color: green;
+}
+
+.ui-button {
+    height: 24px;
+}
+
+.ui-icon.ui-apogeu-save { 
+    width: 16px; 
+    height: 16px; 
+    background-image: url("#{resource['imagens/dollar.png']}");
+    
+}
+
+
+.email{
+    text-transform: lowercase;
+}
+
+.fundo {
+    -webkit-background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    overflow: hidden
+}
+
+.background {
+    background-color: background;
+}
+
+.ui-state-disabled {
+    opacity: .80 !important;
+}

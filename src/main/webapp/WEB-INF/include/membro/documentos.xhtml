@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition>
+        <h:panelGrid style="clear: left; float: left">
+            <p:outputLabel value="CPF" for="cpf"/>
+            <p:inputMask id="cpf" mask="999.999.999-99" size="15" required="true" value="#{membroController.membro.cpf}"/>
+        </h:panelGrid>
+
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="RG" for="rg"/>
+            <p:inputText id="rg" size="10" value="#{membroController.membro.rg}"/>
+        </h:panelGrid>
+
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Órgão Emissor" for="emissor"/>
+            <p:inputText id="emissor" size="10" value="#{membroController.membro.emissorRg}"/>
+        </h:panelGrid>
+
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Título de Eleitor" for="titulo"/>
+            <p:inputText id="titulo" size="12" value="#{membroController.membro.tituloEleitor}"/>
+        </h:panelGrid>
+
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Zona" for="zona"/>
+            <p:inputText id="zona" size="5" value="#{membroController.membro.zonaTitulo}"/>
+        </h:panelGrid>
+
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Seção" for="secao"/>
+            <p:inputText id="secao" size="5" value="#{membroController.membro.secaoTitulo}"/>
+        </h:panelGrid>
+    </ui:composition>
+
+</html>

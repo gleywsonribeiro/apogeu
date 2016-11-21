@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form id="form">
+            <p:growl autoUpdate="true"/>
+            <p:fieldset legend="Cadastro de Cargos" style="width: 600px">
+                <h:panelGrid columns="3" id="painel">
+                    <p:outputLabel value="Nome do cargo" for="cargo"/>
+                    <p:inputText id="cargo" value="#{cargoController.cargo.nome}" required="true" requiredMessage="Nome do cargo precisa ser informado"/>
+                    <p:commandButton value="Salvar" action="#{cargoController.salvar()}" update="tabelaCargo painel"/>
+                </h:panelGrid>
+
+                <p:dataTable id="tabelaCargo" value="#{cargoController.cargos}" var="cargo" emptyMessage="Sem registros." rows="10" style="margin-top: 10px" paginator="true">
+                    <f:facet name="header">
+                        Cargos
+                    </f:facet>
+                    <p:column headerText="Código" width="20%">
+                        <h:outputText value="#{cargo.id}"/>
+                    </p:column>
+                    <p:column headerText="Nome do Cargo">
+                        <h:outputText value="#{cargo.nome}"/>
+                    </p:column>
+                    <p:column style="width: 60px">
+                        <p:commandButton icon="ui-icon-pencil" title="Editar" process="tabelaCargo" update=":form:cargo">
+                            <f:setPropertyActionListener target="#{cargoController.cargo}" value="#{cargo}"/>
+                        </p:commandButton>
+                        <p:commandButton icon="ui-icon-trash" update="tabelaCargo" process="tabelaCargo" action="#{cargoController.remover()}" title="Excluir">
+                            <p:confirm header="Exclusão" message="Deseja realmente excluir?" icon="ui-icon-alert"/>
+                            <f:setPropertyActionListener target="#{cargoController.cargo}" value="#{cargo}"/>
+                        </p:commandButton>
+                    </p:column>
+                </p:dataTable>
+            </p:fieldset>
+
+
+
+            <p:confirmDialog global="true">  
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

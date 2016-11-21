@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:panelGroup>
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Empresa" for="empresa"/>
+                <p:inputText id="empresa" size="40" value="#{membroController.membro.empresa.nome}"/>
+            </h:panelGrid>
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Telefone" for="telefoneEmpresa"/>
+                <p:inputText id="telefoneEmpresa" size="10" value="#{membroController.membro.empresa.telefone}"/>
+            </h:panelGrid>
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Cargo" for="cargo"/>
+                <p:inputText id="cargo" size="20" value="#{membroController.membro.empresa.cargo}"/>
+            </h:panelGrid>
+
+            <h:panelGrid style="float: left">
+                <p:outputLabel value="Apelido? " for="apelido"/>
+                <p:inputText id="apelido" size="10"/>
+            </h:panelGrid>
+        </h:panelGroup>
+    </ui:composition>
+
+</html>

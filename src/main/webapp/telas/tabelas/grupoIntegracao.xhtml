@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form id="form">
+            <p:growl autoUpdate="true"/>
+            <h:panelGrid columns="3" id="painel">
+                <p:outputLabel value="Nome do grupo" for="grupo"/>
+                <p:inputText id="grupo" value="#{integracaoController.integracao.nomeGrupo}" required="true" requiredMessage="Nome do grupo de integração deve ser informado"/>
+                <p:commandButton value="Salvar" action="#{integracaoController.salvar()}" update="tabelaGrupo painel"/>
+            </h:panelGrid>
+
+            <p:dataTable id="tabelaGrupo" value="#{integracaoController.integracoes}" var="grupo" emptyMessage="Sem registros." rows="10" style="width: 600px; margin-top: 10px" paginator="true">
+                <f:facet name="header">
+                    Grupos de Integração
+                </f:facet>
+                <p:column headerText="Código" width="20%">
+                    <h:outputText value="#{grupo.id}"/>
+                </p:column>
+                <p:column headerText="Grupo">
+                    <h:outputText value="#{grupo.nomeGrupo}"/>
+                </p:column>
+                <p:column style="width: 60px">
+                    <p:commandButton icon="ui-icon-pencil" title="Editar" process="tabelaGrupo" update=":form:grupo">
+                        <f:setPropertyActionListener target="#{integracaoController.integracao}" value="#{grupo}"/>
+                    </p:commandButton>
+                    <p:commandButton icon="ui-icon-trash" update="tabelaGrupo" process="tabelaGrupo" action="#{integracaoController.remover()}" title="Excluir">
+                        <p:confirm header="Exclusão" message="Deseja realmente excluir?" icon="ui-icon-alert"/>
+                        <f:setPropertyActionListener target="#{integracaoController.integracao}" value="#{grupo}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+            
+            <p:confirmDialog global="true">  
+                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
+                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
+            </p:confirmDialog>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

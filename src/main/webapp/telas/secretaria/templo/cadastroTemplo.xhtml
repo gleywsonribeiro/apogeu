@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl autoUpdate="true"/>
+            <p:toolbar style="margin-bottom: 5px">
+                <f:facet name="left">
+                    <p:commandButton value="Novo" icon="ui-icon-document" action="#{temploController.novo()}"/> <!--outcome="/produtos/CadastroProduto"-->
+                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" action="#{temploController.salvar()}" update="@form"/>
+                </f:facet>
+                <f:facet name="right">
+                    <p:button value="Pesquisar" icon="ui-icon-search" outcome="pesquisaTemplo"/>
+                </f:facet>
+            </p:toolbar>
+            <p:panel header="Cadastro de Templo" style="width: 800px">
+                <h:panelGrid columns="2">
+                    <h:panelGroup style="float: left">
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Código" for="codigo"/>
+                            <p:inputText id="codigo" size="5" disabled="true" value="#{temploController.templo.id}"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Nome do Templo" for="nome"/>
+                            <p:inputText id="nome" size="39" maxlength="50" value="#{temploController.templo.nome}" required="true"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="CNPJ" for="cnpj"/>
+                            <p:inputMask mask="99.999.999/99999-99" id="cnpj" size="18" value="#{temploController.templo.cnpj}" required="true"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="E-mail" for="email"/>
+                            <p:inputText id="email" size="28" value="#{temploController.templo.contato.email}"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="Endereço" for="endereco"/>
+                            <p:inputText id="endereco" size="69" value="#{temploController.templo.endereco.logradouro}" required="true"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Número" for="numero"/>
+                            <p:inputText id="numero" size="6" maxlength="6" value="#{temploController.templo.endereco.numero}" required="true"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Estado" for="uf"/>
+                            <p:inputText id="uf" size="20" maxlength="50" value="#{temploController.templo.endereco.estado}"/>                                
+                        </h:panelGrid>
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="Cidade" for="cidade"/>
+                            <p:inputText id="cidade" size="50" maxlength="50" value="#{temploController.templo.endereco.cidade}"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Bairro" for="bairro"/>
+                            <p:inputText id="bairro" size="10" maxlength="50" value="#{temploController.templo.endereco.bairro}"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="CEP" for="cep"/>
+                            <p:inputText id="cep" size="10" maxlength="10" value="#{temploController.templo.endereco.cep}"/>
+                        </h:panelGrid>
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Telefone" for="telefone"/>
+                            <p:inputText id="telefone" size="20" value="#{temploController.templo.contato.telefone}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="Responsável" for="responsavel"/>
+                            <p:selectOneMenu id="responsavel" value="#{temploController.templo.responsavel}" converter="#{membroConverter}" required="false">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{membroController.membros}" var="membro" itemValue="#{membro}" itemLabel="#{membro.nome}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Sede" for="sede"/>
+                            <p:selectOneMenu id="sede" value="#{temploController.templo.sede}" converter="#{sedeConverter}" required="false">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{sedeController.sedes}" var="sede" itemValue="#{sede}" itemLabel="#{sede.nome}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                    </h:panelGroup>
+                </h:panelGrid>
+
+
+            </p:panel>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>

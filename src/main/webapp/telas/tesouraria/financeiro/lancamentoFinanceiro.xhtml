@@ -1,0 +1,116 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl id="messages"/>
+
+            <p:fieldset legend="#{lancamentoFinanceiroController.templo.nome}" style="width: 400px">
+                <h:panelGroup id="formLancamento">
+                    <h:panelGrid columns="1" style="clear: left; float: left">
+                        <p:outputLabel value="Data do lançamento" for="lancamento"/>
+                        <p:calendar id="lancamento" size="12" locale="pt" mask="true"
+                                    pattern="dd/MM/yyyy" required="true" requiredMessage="Data deve ser informada"
+                                    value="#{lancamentoFinanceiroController.lancamento.dataLancamento}"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="clear: left; float: left">
+                        <p:outputLabel value="Valor da Oferta" for="oferta"/>
+                        <p:inputNumber id="oferta" value="#{lancamentoFinanceiroController.lancamento.valorOferta}" size="15"
+                                       symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor da oferta"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Valor do Dízimo" for="dizimo"/>
+                        <p:inputNumber id="dizimo" value="#{lancamentoFinanceiroController.lancamento.valorDizimo}" size="15"
+                                       symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor do dízimo"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Valor do Boas Novas" for="novas"/>
+                        <p:inputNumber id="novas" value="#{lancamentoFinanceiroController.lancamento.valorBoasnovas}" size="15"
+                                       symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor das boas novas"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="float: left">
+                        <p:outputLabel value="Outros valores" for="outros"/>
+                        <p:inputNumber id="outros" value="#{lancamentoFinanceiroController.lancamento.outrosValores}" size="15"
+                                       symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                       decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor para outros valores"/>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="clear: left;">
+                        <p:outputLabel value="Centro de Custo" for="custo"/>
+                        <p:selectOneMenu id="custo">
+                            <f:selectItem itemLabel="Selecione"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+
+                    <h:panelGrid columns="1" style="margin-bottom: 5px">
+                        <p:outputLabel value="Observação" for="observacao"/>
+                        <p:inputTextarea id="observacao" rows="3" value="#{lancamentoFinanceiroController.lancamento.observacao}" required="true" requiredMessage="Observação é necessária"/>
+                    </h:panelGrid>
+
+                    <p:commandButton value="Imprimir Recibo" style="margin-right: 5px"/>
+                    <p:commandButton value="Imprimir Caixa" style="margin-right: 5px"/>
+                    <p:commandButton value="Salvar" action="#{lancamentoFinanceiroController.salvar()}" update="formLancamento tableLancamentos messages" style="margin-right: 5px"/>
+                    <p:commandButton value="Sair" action="#{lancamentoFinanceiroController.sair()}" immediate="true"/>
+                </h:panelGroup>
+            </p:fieldset>
+
+            <p:dataTable id="tableLancamentos" style="width: 1000px; margin-top: 10px" value="#{lancamentoFinanceiroController.lancamentos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         var="lancamento" emptyMessage="Não há registros." paginator="true" rows="5">
+                <f:facet name="header">
+                    Lançamentos Financeiros
+                </f:facet>
+
+                <p:column headerText="Código">
+                    <h:outputText value="#{lancamento.id}"/>
+                </p:column>
+                <p:column headerText="Lançamento">
+                    <h:outputText value="#{lancamento.dataLancamento}">
+                        <f:convertDateTime pattern="dd/MM/yyyy"/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Oferta">
+                    <h:outputText value="#{lancamento.valorOferta}">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Dízimo">
+                    <h:outputText value="#{lancamento.valorDizimo}">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Boa Novas">
+                    <h:outputText value="#{lancamento.valorBoasnovas}">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Outros Valores">
+                    <h:outputText value="#{lancamento.outrosValores}">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Total" style="font-weight: bold; color: brown">
+                    <h:outputText value="#{lancamento.total}">
+                        <f:convertNumber type="currency" currencySymbol="R$ "/>
+                    </h:outputText>
+                </p:column>
+                <p:column headerText="Templo">
+                    <h:outputText value="#{lancamento.templo.nome}"/>
+                </p:column>
+                
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

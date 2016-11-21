@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:panelGrid style="clear: left; float: left">
+            <p:outputLabel value="Logradouro" for="logradouro"/>
+            <p:inputText id="logradouro" size="55" value="#{membroController.membro.endereco.logradouro}" required="true"/>
+        </h:panelGrid>
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Número" for="numero"/>
+            <p:inputText id="numero" size="10" value="#{membroController.membro.endereco.numero}" required="true"/>
+        </h:panelGrid>
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Bairro" for="bairro"/>
+            <p:inputText id="bairro" size="20" value="#{membroController.membro.endereco.bairro}" required="true"/>
+        </h:panelGrid>
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Complemento" for="complemento"/>
+            <p:inputText id="complemento" size="30" value="#{membroController.membro.endereco.complemento}"/>
+        </h:panelGrid>
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Cidade" for="cidade"/>
+            <p:inputText value="#{membroController.membro.endereco.cidade}" id="cidade" size="20"/>
+        </h:panelGrid>
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="Estado" for="estado"/>
+            <p:inputText id="estado" value="#{membroController.membro.endereco.estado}" size="20"/>
+        </h:panelGrid>
+        <h:panelGrid style="float: left">
+            <p:outputLabel value="CEP" for="cep"/>
+            <p:inputMask mask="99999-999" id="cep" size="10" value="#{membroController.membro.endereco.cep}"/>
+        </h:panelGrid>
+    </ui:composition>
+
+</html>

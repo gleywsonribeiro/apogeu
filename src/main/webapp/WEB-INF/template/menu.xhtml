@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+        <h:form id="menuForm">
+            <p:menubar autoDisplay="false">
+                <p:menuitem value="Início" outcome="/home" icon="fa fa-home"/>
+                <p:submenu label="Secretaria" icon="fa fa-suitcase">
+                    <p:menuitem value="Sede" outcome="/telas/secretaria/sede/pesquisaSede"/>
+                    <p:menuitem value="Templo" icon="fa fa-bank" outcome="/telas/secretaria/templo/cadastroTemplo"/>
+                    <p:menuitem value="Membros" icon="fa fa-user" outcome="/telas/secretaria/membro/pesquisaMembros"/>
+                    <p:submenu label="RBN">
+                        <p:menuitem value="Lançamento" outcome="/telas/secretaria/rbn/lancamentoRBN"/>
+                        <p:menuitem value="Confirmar Pagamento" outcome="/telas/secretaria/rbn/pendenciaRBN"/>
+                    </p:submenu>
+                </p:submenu>
+                <p:submenu label="Tesouraria" icon="fa fa-bank">
+                    <p:menuitem value="Controle Financeiro" outcome="/telas/tesouraria/financeiro/templos"/>
+                    <p:menuitem value="Controle de Caixa" outcome="/telas/tesouraria/caixa/templos"/>
+                    <p:submenu label="Contas a Pagar">
+                        <p:menuitem value="Lançamento" outcome="/telas/tesouraria/contapagar/lancamento/templos"/>
+                        <p:menuitem value="Pagamento" outcome="/telas/tesouraria/contapagar/pagamento/templos"/>
+                    </p:submenu>
+                    <p:separator/>
+                    <p:menuitem value="Patrimônio" outcome="/telas/tesouraria/patrimonio/pesquisa"/>
+                    <p:menuitem value="Departamento"/>
+                </p:submenu>
+                <p:menuitem value="EBD" icon="fa fa-graduation-cap"/>
+                <p:submenu label="Tabelas" icon="fa fa-table">
+                    <p:menuitem value="Situação de Membro" outcome="/telas/tabelas/situacaoMembro"/>
+                    <p:menuitem value="Tipo de Admissão" outcome="/telas/tabelas/tipoAdmissao"/>
+                    <p:menuitem value="Grupo de Integração" outcome="/telas/tabelas/grupoIntegracao"/>
+                    <p:menuitem value="Cargos" outcome="/telas/tabelas/cargo"/>
+                    <p:menuitem value="Funções" outcome="/telas/tabelas/funcao"/>
+                    <p:separator/>
+                    <p:menuitem value="Centro de Custo" outcome="/telas/tabelas/centroCusto"/>
+                    
+                </p:submenu>
+                <p:menuitem value="Relatórios" outcome="/telas/relatorios/index" icon="fa fa-clipboard"/>
+                <p:submenu label="configurações" icon="fa fa-wrench">
+                    
+                </p:submenu>
+                <p:menuitem value="Login" outcome="/login" icon="fa fa-key"/>
+                <p:menuitem value="Ajuda" outcome="/telas/ajuda/index" icon="fa fa-info"/>
+                <p:menuitem value="Sair" icon="fa fa-power-off" url="/j_spring_security_logout"/>
+            </p:menubar> 
+        </h:form>
+    </ui:composition>
+
+</html>

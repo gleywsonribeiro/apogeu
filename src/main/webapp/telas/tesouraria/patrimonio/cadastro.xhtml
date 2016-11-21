@@ -1,0 +1,117 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form>
+            <p:growl autoUpdate="true"/>
+            <p:toolbar style="margin-bottom: 5px">
+                <f:facet name="left">
+                    <!--<p:button value="Novo" icon="ui-icon-document"/> outcome="/produtos/CadastroProduto"-->
+                    <p:commandButton value="Salvar" id="btSalvar" icon="ui-icon-disk" update="@form" action="#{patrimonioController.salvar()}"/>
+                </f:facet>
+                <f:facet name="right">
+                    <p:button value="Pesquisar" icon="ui-icon-search" outcome="pesquisa"/>
+                </f:facet>
+            </p:toolbar>
+            <p:panel header="Cadastro de Patrimônio" style="width: 750px">
+                <h:panelGrid columns="2">
+                    <h:panelGroup style="float: left">
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Código" for="codigo"/>
+                            <p:inputText id="codigo" size="5" disabled="true" value="#{patrimonioController.patrimonio.id}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Data da compra" for="dataCompra"/>
+                            <p:calendar id="dataCompra" size="12" locale="pt" mask="true"
+                                        pattern="dd/MM/yyyy" required="true" requiredMessage="Data deve ser informada"
+                                        value="#{patrimonioController.patrimonio.dataCompra}">
+                                <p:ajax event="change" update="anoAquisicao" process="@this"/>
+                            </p:calendar>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Nome do produto" for="produto"/>
+                            <p:inputText id="produto" size="63" required="true" value="#{patrimonioController.patrimonio.produto}" requiredMessage="Nome do patrimônio é necessário"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="Marca" for="marca"/>
+                            <p:inputText id="marca" size="25" value="#{patrimonioController.patrimonio.marca}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Modelo" for="modelo"/>
+                            <p:inputText id="modelo" size="25" value="#{patrimonioController.patrimonio.modelo}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Cor" for="cor"/>
+                            <p:inputText id="cor" size="15" value="#{patrimonioController.patrimonio.cor}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Ano Aquisição" for="anoAquisicao"/>
+                            <p:inputText id="anoAquisicao" size="10" value="#{patrimonioController.patrimonio.dataCompra.year}" disabled="true"/>
+                        </h:panelGrid>
+
+
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="Nota fiscal" for="notaFiscal"/>
+                            <p:inputText id="notaFiscal" size="10" value="#{patrimonioController.patrimonio.numeroNota}"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Fornecedor" for="fornecedor"/>
+                            <p:inputText id="fornecedor" size="20" />
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Valor do produto" for="valor"/>
+                            <p:inputNumber id="valor" size="15" value="#{patrimonioController.patrimonio.valor}"
+                                           symbol="R$ " decimalSeparator="," thousandSeparator="."
+                                           decimalPlaces="2" required="true" requiredMessage="Por favor, informe o valor do produto"/>
+                        </h:panelGrid>
+
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Quantidade" for="qtd"/>
+                            <p:spinner id="qtd" size="16" required="true" value="#{patrimonioController.patrimonio.quantidade}"/>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="Templo" for="templo"/>
+                            <p:selectOneMenu id="templo" value="#{patrimonioController.patrimonio.templo}" converter="#{temploConverter}" required="true" requiredMessage="Escolha o Centro de Custo">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{temploController.templos}" var="templo" itemLabel="#{templo.nome}" itemValue="#{templo}"/>
+                                <p:ajax event="change" update="setor"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        
+                        <h:panelGrid style="float: left">
+                            <p:outputLabel value="Centro de custo" for="setor"/>
+                            <p:selectOneMenu id="setor" value="#{patrimonioController.patrimonio.centroDeCusto}" converter="#{centroCustoConverter}" required="true" requiredMessage="Escolha o Centro de Custo">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{patrimonioController.patrimonio.templo.setores}" var="setor" itemLabel="#{setor.nome}" itemValue="#{setor}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        
+
+                        <h:panelGrid style="clear: left; float: left">
+                            <p:outputLabel value="Estado de uso" for="uso"/>
+                            <p:inputTextarea id="uso" rows="3" cols="50" value="#{patrimonioController.patrimonio.estadoUso}"/>
+                        </h:panelGrid>
+                        
+                    </h:panelGroup>
+                </h:panelGrid>
+
+            </p:panel>
+
+        </h:form>
+    </ui:define>
+
+</ui:composition>
