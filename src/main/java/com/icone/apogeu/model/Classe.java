@@ -11,6 +11,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -25,6 +27,12 @@ public class Classe implements Serializable {
     private Long id;
     @Column(nullable = false, length = 50)
     private String descricao;
+    
+    @OneToOne
+    private Membro professor;
+    
+    @ManyToOne
+    private Templo templo;
 
     public Long getId() {
         return id;
@@ -34,12 +42,28 @@ public class Classe implements Serializable {
         this.id = id;
     }
 
+    public Membro getProfessor() {
+        return professor;
+    }
+
+    public void setProfessor(Membro professor) {
+        this.professor = professor;
+    }
+
     public String getDescricao() {
         return descricao;
     }
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
+    }
+
+    public Templo getTemplo() {
+        return templo;
+    }
+
+    public void setTemplo(Templo templo) {
+        this.templo = templo;
     }
 
     @Override

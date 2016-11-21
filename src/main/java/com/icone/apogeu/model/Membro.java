@@ -19,6 +19,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
@@ -176,7 +177,11 @@ public class Membro implements Serializable {
     @ManyToOne
 //    @JoinColumn(nullable = false)
     private Templo templo;
-
+    
+    @OneToOne(mappedBy = "professor")
+    private Classe classe;
+   
+    
     @Lob
     private byte[] foto;
 
@@ -197,6 +202,14 @@ public class Membro implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Classe getClasse() {
+        return classe;
+    }
+
+    public void setClasse(Classe classe) {
+        this.classe = classe;
     }
 
     public Templo getTemplo() {

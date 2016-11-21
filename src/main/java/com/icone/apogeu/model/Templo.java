@@ -27,6 +27,9 @@ import javax.persistence.OneToOne;
 @Entity
 public class Templo implements Serializable {
 
+    @OneToMany(mappedBy = "templo")
+    private List<Classe> classes;
+
     @OneToMany(mappedBy = "templo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<CentroDeCusto> setores;
 
@@ -67,6 +70,14 @@ public class Templo implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public List<Classe> getClasses() {
+        return classes;
+    }
+
+    public void setClasses(List<Classe> classes) {
+        this.classes = classes;
     }
 
     public Membro getResponsavel() {
