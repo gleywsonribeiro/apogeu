@@ -178,6 +178,9 @@ public class Membro implements Serializable {
 //    @JoinColumn(nullable = false)
     private Templo templo;
     
+    @ManyToOne
+    private Classe turma;
+    
     @OneToOne(mappedBy = "professor")
     private Classe classe;
    
@@ -202,6 +205,14 @@ public class Membro implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Classe getTurma() {
+        return turma;
+    }
+
+    public void setTurma(Classe turma) {
+        this.turma = turma;
     }
 
     public Classe getClasse() {

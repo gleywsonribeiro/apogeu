@@ -6,12 +6,15 @@
 package com.icone.apogeu.model;
 
 import java.io.Serializable;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 /**
@@ -33,6 +36,10 @@ public class Classe implements Serializable {
     
     @ManyToOne
     private Templo templo;
+    
+    @OneToMany(mappedBy = "turma", cascade = CascadeType.ALL)
+    private List<Membro> alunos;
+
 
     public Long getId() {
         return id;
@@ -42,6 +49,14 @@ public class Classe implements Serializable {
         this.id = id;
     }
 
+    public List<Membro> getAlunos() {
+        return alunos;
+    }
+
+    public void setAlunos(List<Membro> alunos) {
+        this.alunos = alunos;
+    }
+    
     public Membro getProfessor() {
         return professor;
     }
