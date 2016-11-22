@@ -29,7 +29,9 @@
                     <p:menuitem value="Patrimônio" outcome="/telas/tesouraria/patrimonio/pesquisa"/>
                     <p:menuitem value="Departamento"/>
                 </p:submenu>
-                <p:menuitem value="EBD" icon="fa fa-graduation-cap"/>
+                <p:submenu label="EBD" icon="fa fa-graduation-cap">
+                    <p:menuitem value="Cadastro de Classes" outcome="/telas/ebd/cadastroClasse"/>
+                </p:submenu>
                 <p:submenu label="Tabelas" icon="fa fa-table">
                     <p:menuitem value="Situação de Membro" outcome="/telas/tabelas/situacaoMembro"/>
                     <p:menuitem value="Tipo de Admissão" outcome="/telas/tabelas/tipoAdmissao"/>
@@ -38,7 +40,6 @@
                     <p:menuitem value="Funções" outcome="/telas/tabelas/funcao"/>
                     <p:separator/>
                     <p:menuitem value="Centro de Custo" outcome="/telas/tabelas/centroCusto"/>
-                    
                 </p:submenu>
                 <p:menuitem value="Relatórios" outcome="/telas/relatorios/index" icon="fa fa-clipboard"/>
                 <p:submenu label="configurações" icon="fa fa-wrench">
