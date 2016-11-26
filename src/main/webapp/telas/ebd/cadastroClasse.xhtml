@@ -9,34 +9,43 @@
     <ui:define name="body">
         <h:form id="form">
             <p:growl autoUpdate="true"/>
-            <p:fieldset legend="Cadastro de Cargos" style="width: 600px">
-                <h:panelGrid columns="3" id="painel">
-                    <p:outputLabel value="Nome do cargo" for="cargo"/>
-                    <p:inputText id="cargo" value="#{cargoController.cargo.nome}" required="true" requiredMessage="Nome do cargo precisa ser informado"/>
-                    <p:commandButton value="Salvar" action="#{cargoController.salvar()}" update="tabelaCargo painel"/>
-                </h:panelGrid>
-
-                <p:dataTable id="tabelaCargo" value="#{cargoController.cargos}" var="cargo" emptyMessage="Sem registros." rows="10" style="margin-top: 10px" paginator="true">
-                    <f:facet name="header">
-                        Cargos
-                    </f:facet>
-                    <p:column headerText="Código" width="20%">
-                        <h:outputText value="#{cargo.id}"/>
-                    </p:column>
-                    <p:column headerText="Nome do Cargo">
-                        <h:outputText value="#{cargo.nome}"/>
-                    </p:column>
-                    <p:column style="width: 60px">
-                        <p:commandButton icon="ui-icon-pencil" title="Editar" process="tabelaCargo" update=":form:cargo">
-                            <f:setPropertyActionListener target="#{cargoController.cargo}" value="#{cargo}"/>
-                        </p:commandButton>
-                        <p:commandButton icon="ui-icon-trash" update="tabelaCargo" process="tabelaCargo" action="#{cargoController.remover()}" title="Excluir">
-                            <p:confirm header="Exclusão" message="Deseja realmente excluir?" icon="ui-icon-alert"/>
-                            <f:setPropertyActionListener target="#{cargoController.cargo}" value="#{cargo}"/>
-                        </p:commandButton>
-                    </p:column>
-                </p:dataTable>
+            <p:fieldset legend="Cadastro de Classes" style="width: 600px">
+                <h:panelGroup id="painel">
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Classe" for="classe"/>
+                        <p:inputText id="classe" value="#{classeController.classe.descricao}" required="true" requiredMessage="Nome do classe deve ser informado"/>
+                    </h:panelGrid>
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Professor" for="professor"/>
+                        <p:selectOneMenu id="professor" value="#{classeController.classe.professor}" converter="#{membroConverter}" required="true" requiredMessage="Professor deve ser informado">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItems value="#{membroController.membros}" var="membro" itemLabel="#{membro.nome}" itemValue="#{membro}"/>
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                </h:panelGroup>
             </p:fieldset>
+            <p:commandButton value="Salvar" style="margin-top: 5px" action="#{classeController.salvar()}" update="tabelaClasses painel"/>
+
+            <p:dataTable id="tabelaClasses" value="#{classeController.classes}" var="classe" emptyMessage="Sem registros." rows="10" style="margin-top: 10px" paginator="true">
+                <f:facet name="header">
+                    Classes EBD
+                </f:facet>
+                <p:column headerText="Código" width="20%">
+                    <h:outputText value="#{classe.id}"/>
+                </p:column>
+                <p:column headerText="Classe">
+                    <h:outputText value="#{classe.descricao}"/>
+                </p:column>
+                <!--                    <p:column style="width: 60px">
+                                        <p:commandButton icon="ui-icon-pencil" title="Editar" process="tabelaCargo" update=":form:cargo">
+                                            <f:setPropertyActionListener target="" value=""/>
+                                        </p:commandButton>
+                                        <p:commandButton icon="ui-icon-trash" update="tabelaCargo" process="tabelaCargo" action="#{cargoController.remover()}" title="Excluir">
+                                            <p:confirm header="Exclusão" message="Deseja realmente excluir?" icon="ui-icon-alert"/>
+                                            <f:setPropertyActionListener target="" value=""/>
+                                        </p:commandButton>
+                                    </p:column>-->
+            </p:dataTable>
 
 
 
