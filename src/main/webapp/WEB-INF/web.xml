@@ -45,4 +45,46 @@
     <welcome-file-list>
         <welcome-file>faces/home.xhtml</welcome-file>
     </welcome-file-list>
+    <security-constraint>
+        <display-name>AdminConstraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Tesoureiro</web-resource-name>
+            <description/>
+            <url-pattern>/telas/tesouraria/*</url-pattern>
+            <url-pattern>/home.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>tesoureiro</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <security-constraint>
+        <display-name>UserContraint</display-name>
+        <web-resource-collection>
+            <web-resource-name>Secretario</web-resource-name>
+            <description>User vai usar aqui</description>
+            <url-pattern>/telas/secretaria/*</url-pattern>
+            <url-pattern>/home.xhtml</url-pattern>
+        </web-resource-collection>
+        <auth-constraint>
+            <description/>
+            <role-name>secretario</role-name>
+        </auth-constraint>
+    </security-constraint>
+    <login-config>
+        <auth-method>FORM</auth-method>
+        <realm-name>file</realm-name>
+        <form-login-config>
+            <form-login-page>/login.xhtml</form-login-page>
+            <form-error-page>/erro.xhtml</form-error-page>
+        </form-login-config>
+    </login-config>
+    <security-role>
+        <description>Faz o trabalho da secretaria</description>
+        <role-name>secretario</role-name>
+    </security-role>
+    <security-role>
+        <description>Trabalha com dinheiro</description>
+        <role-name>tesoureiro</role-name>
+    </security-role>
 </web-app>
