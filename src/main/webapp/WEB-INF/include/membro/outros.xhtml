@@ -122,15 +122,11 @@
             </p:selectOneMenu>
         </h:panelGrid>
 
-        <h:panelGrid columns="1" style="clear: left; float: left; margin-left: 5px;">
-            <p:outputLabel value="EBD" for="ebd"/>
-            <p:selectBooleanCheckbox id="ebd"/>
-        </h:panelGrid>
-
         <h:panelGrid columns="1" style="float: left; margin-left: 5px;">
-            <p:outputLabel value="Classe da EBD" for="classeEBD"/>
-            <p:selectOneMenu id="classeEBD">
+            <p:outputLabel value="Templo" for="templo"/>
+            <p:selectOneMenu id="templo" value="#{membroController.membro.templo}" converter="#{temploConverter}" required="true" requiredMessage="Templo deve ser informado">
                 <f:selectItem itemLabel="Selecione"/>
+                <f:selectItems value="#{temploController.templos}" var="templo" itemLabel="#{templo.nome}" itemValue="#{templo}"/>
             </p:selectOneMenu>
         </h:panelGrid>
     </ui:composition>

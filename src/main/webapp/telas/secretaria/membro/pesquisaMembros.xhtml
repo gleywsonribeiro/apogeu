@@ -40,6 +40,9 @@
                         <f:convertDateTime pattern="dd/MM/yyyy"/>
                     </h:outputText>
                 </p:column>
+                <p:column headerText="Templo">
+                    <h:outputText value="#{membro.templo.nome}"/>
+                </p:column>
                 <p:column style="width: 100px; text-align: center">
                     <p:commandButton icon="ui-icon-pencil" title="Editar" ajax="false" action="cadastroMembro">
                         <f:setPropertyActionListener target="#{membroController.membro}" value="#{membro}"/>

@@ -15,6 +15,16 @@
                         <p:outputLabel value="Classe" for="classe"/>
                         <p:inputText id="classe" value="#{classeController.classe.descricao}" required="true" requiredMessage="Nome do classe deve ser informado"/>
                     </h:panelGrid>
+                    
+                    <h:panelGrid style="float: left">
+                        <p:outputLabel value="Templo" for="templo"/>
+                        <p:selectOneMenu id="templo" value="#{classeController.classe.templo}" converter="#{temploConverter}" required="true" requiredMessage="Templo deve ser informado">
+                            <f:selectItem itemLabel="Selecione"/>
+                            <f:selectItems value="#{temploController.templos}" var="templo" itemLabel="#{templo.nome}" itemValue="#{templo}"/>
+                            <!--<p:ajax update="professor"/>-->
+                        </p:selectOneMenu>
+                    </h:panelGrid>
+                    
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="Professor" for="professor"/>
                         <p:selectOneMenu id="professor" value="#{classeController.classe.professor}" converter="#{membroConverter}" required="true" requiredMessage="Professor deve ser informado">
@@ -35,6 +45,12 @@
                 </p:column>
                 <p:column headerText="Classe">
                     <h:outputText value="#{classe.descricao}"/>
+                </p:column>
+                <p:column headerText="Templo">
+                    <h:outputText value="#{classe.templo.nome}"/>
+                </p:column>
+                <p:column headerText="Professor">
+                    <h:outputText value="#{classe.professor.nome}"/>
                 </p:column>
                 <!--                    <p:column style="width: 60px">
                                         <p:commandButton icon="ui-icon-pencil" title="Editar" process="tabelaCargo" update=":form:cargo">

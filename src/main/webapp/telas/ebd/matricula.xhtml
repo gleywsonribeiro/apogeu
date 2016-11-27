@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/WEB-INF/template/template.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="body">
+        <h:form id="form">
+            <p:growl autoUpdate="true"/>
+            <p:dataTable id="temploTable" value="#{temploController.templos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         selectionMode="single" selection="#{temploController.templo}" rowKey="#{templo.id}"
+                         var="templo" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+                <p:column headerText="Código" style="text-align: center; width: 100px">
+                    <h:outputText value="#{templo.id}"/>
+                </p:column>
+                <p:column headerText="Templo">
+                    <h:outputText value="#{templo.nome}"/>
+                </p:column>
+                <p:column headerText="Sede">
+                    <h:outputText value="#{templo.sede.nome}"/>
+                </p:column>
+                <p:column headerText="Responsavel">
+                    <h:outputText value="#{templo.responsavel.nome}"/>
+                </p:column>
+                
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

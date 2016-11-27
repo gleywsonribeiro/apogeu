@@ -43,7 +43,7 @@ public class TemploController implements Serializable {
         }
         inicializar();
         endConvertation();
-        return "pesquisaTemplo";
+        return "pesquisaTemplo?faces-redirect=true";
 //        JsfUtil.redirect("/faces/telas/secretaria/templo/pesquisaTemplo.xhtml");
     }
     

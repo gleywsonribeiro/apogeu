@@ -28,6 +28,9 @@ import javax.persistence.OneToOne;
 public class Templo implements Serializable {
 
     @OneToMany(mappedBy = "templo")
+    private List<Membro> membros;
+
+    @OneToMany(mappedBy = "templo")
     private List<Classe> classes;
 
     @OneToMany(mappedBy = "templo", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
@@ -82,6 +85,14 @@ public class Templo implements Serializable {
 
     public Membro getResponsavel() {
         return responsavel;
+    }
+
+    public List<Membro> getMembros() {
+        return membros;
+    }
+
+    public void setMembros(List<Membro> membros) {
+        this.membros = membros;
     }
 
     public List<LancamentoDeCaixa> getLancamentosDeCaixa() {
