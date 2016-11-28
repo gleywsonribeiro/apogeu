@@ -9,9 +9,15 @@
     <ui:define name="body">
         <h:form id="form">
             <p:growl autoUpdate="true"/>
-            <p:dataTable id="temploTable" value="#{temploController.templos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
-                         selectionMode="single" selection="#{temploController.templo}" rowKey="#{templo.id}"
+            <p:dataTable id="temploTable" value="#{matriculaController.templos}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         selectionMode="single" selection="#{matriculaController.templo}" rowKey="#{templo.id}"
                          var="templo" style="margin-top: 20px;" emptyMessage="Não há registros." paginator="true" rows="5">
+                
+                <p:ajax event="rowSelect" update=":form:tableClasses"/>
+                
+                <f:facet name="header">
+                    <h:outputText value="Templos"/>
+                </f:facet>
                 <p:column headerText="Código" style="text-align: center; width: 100px">
                     <h:outputText value="#{templo.id}"/>
                 </p:column>
@@ -24,8 +30,33 @@
                 <p:column headerText="Responsavel">
                     <h:outputText value="#{templo.responsavel.nome}"/>
                 </p:column>
-                
+
             </p:dataTable>
+
+            <p:dataTable id="tableClasses" style="margin-top: 10px" value="#{matriculaController.templo.classes}" paginatorAlwaysVisible="false" paginatorPosition="bottom"
+                         selectionMode="single" selection="#{matriculaController.classe}" rowKey="#{classe.id}"
+                         var="classe" emptyMessage="Não há registros." paginator="true" rows="5">
+                
+                <p:ajax event="rowSelect" update=":form:membrosDisponiveis"/>
+                
+                <f:facet name="header">
+                    Classes EBD
+                </f:facet>
+
+                <p:column headerText="Código" style="text-align: center; width: 100px">
+                    <h:outputText value="#{classe.id}"/>
+                </p:column>
+                <p:column headerText="Descrição">
+                    <h:outputText value="#{classe.descricao}"/>
+                </p:column>
+                <p:column headerText="Professor">
+                    <h:outputText value="#{classe.professor.nome}"/>
+                </p:column>
+
+            </p:dataTable>
+            
+            <p:pickList id="membrosDisponiveis" value="#{matriculaController.membros}" converter="#{converterPickMembro}"
+                        var="membro" itemLabel="#{membro}" itemValue="#{membro}" effect="bounce"/>
         </h:form>
     </ui:define>
 

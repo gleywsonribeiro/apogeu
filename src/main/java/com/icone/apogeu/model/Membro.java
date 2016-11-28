@@ -18,6 +18,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -28,6 +29,7 @@ import javax.validation.constraints.NotNull;
  *
  * @author gleyw
  */
+@NamedQuery(name = "Membros.Disponiveis", query = "SELECT m FROM Membro m WHERE m.turma = null and m.templo = :templo")
 @Entity
 public class Membro implements Serializable {
 

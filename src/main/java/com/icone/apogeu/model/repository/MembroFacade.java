@@ -6,9 +6,12 @@
 package com.icone.apogeu.model.repository;
 
 import com.icone.apogeu.model.Membro;
+import com.icone.apogeu.model.Templo;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -29,4 +32,10 @@ public class MembroFacade extends AbstractFacade<Membro> {
         super(Membro.class);
     }
     
+    public List<Membro> getMembrosDisponiveisParaEbd(Templo templo) {
+        TypedQuery<Membro> query = getEntityManager().createNamedQuery("Membros.Disponiveis", Membro.class);
+        query.setParameter("templo", templo);
+        
+        return query.getResultList();
+    }
 }

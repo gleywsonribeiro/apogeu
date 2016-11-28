@@ -9,7 +9,7 @@
     <ui:define name="body">
         <h:form id="form">
             <p:growl autoUpdate="true"/>
-            <p:fieldset legend="Cadastro de Classes" style="width: 600px">
+            <p:panel header="Cadastro de Classes" style="width: 600px">
                 <h:panelGroup id="painel">
                     <h:panelGrid style="float: left">
                         <p:outputLabel value="Classe" for="classe"/>
@@ -33,7 +33,7 @@
                         </p:selectOneMenu>
                     </h:panelGrid>
                 </h:panelGroup>
-            </p:fieldset>
+            </p:panel>
             <p:commandButton value="Salvar" style="margin-top: 5px" action="#{classeController.salvar()}" update="tabelaClasses painel"/>
 
             <p:dataTable id="tabelaClasses" value="#{classeController.classes}" var="classe" emptyMessage="Sem registros." rows="10" style="margin-top: 10px" paginator="true">
