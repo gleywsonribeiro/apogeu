@@ -42,7 +42,7 @@
                     <h:outputText value="#{templo.responsavel.nome}"/>
                 </p:column>
                 <p:column style="width: 100px; text-align: center">
-                    <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroTemplo">
+                    <p:commandButton icon="ui-icon-pencil" title="Editar" action="cadastroTemplo?faces-redirect=true">
                         <f:setPropertyActionListener target="#{temploController.templo}" value="#{templo}"/>
                     </p:commandButton>
                     <p:commandButton icon="ui-icon-trash" title="Excluir" update="temploTable" action="#{temploController.remover()}">

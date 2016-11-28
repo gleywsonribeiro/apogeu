@@ -6,7 +6,9 @@
 package com.icone.apogeu.controller;
 
 import com.icone.apogeu.model.Classe;
+import com.icone.apogeu.model.Templo;
 import com.icone.apogeu.model.repository.ClasseFacade;
+import com.icone.apogeu.model.repository.TemploFacade;
 import java.io.Serializable;
 import java.util.List;
 import javax.inject.Named;
@@ -26,6 +28,9 @@ public class ClasseController implements Serializable{
     
     @Inject
     private ClasseFacade repositorio;
+    
+    @Inject
+    private TemploFacade repositorioDeTemplos;
 
     public ClasseController() {
         this.classe = new Classe();
@@ -57,7 +62,9 @@ public class ClasseController implements Serializable{
     }
     
     
-    
+    public List<Templo> getTemplos() {
+        return repositorioDeTemplos.findAll();
+    }
     
     
     

@@ -11,28 +11,11 @@
         <ui:composition template="./WEB-INF/template/template.xhtml">
             <ui:define name="body">
                 <h:form>
-                    <span style="font-weight: bold; color: red">Olá Usuário</span><br/>
-                    <p:commandButton value="Atualizar" action="#{teste.atualizar()}" update="data"/>
-                    <h:outputText id="data" value="#{teste.dataAtual}">
-                        <f:convertDateTime pattern="dd/MM/yyyy"/>
-                    </h:outputText>
-
-                    <p:dataTable value="#{produtosBean.produtos}" var="produto" id="produtosTable" emptyMessage="Não existem produtos." style="margin-top: 10px">
-                        <p:column headerText="Produto">
-                            <h:outputText value="#{produto}"/>
-                        </p:column>
-                        <p:column style="width: 40px">
-                            <p:commandButton icon="ui-icon-trash" action="#{produtosBean.excluirProduto()}" update="produtosTable">
-                                <p:confirm header="Exclusão" message="Tem certeza de que quer remover o #{produto}?" icon="ui-icon-alert"/>
-                                <f:setPropertyActionListener target="#{produtosBean.produtoSelecionado}" value="#{produto}"/>
-                            </p:commandButton>
-                        </p:column>
-                    </p:dataTable>
-
-                    <p:confirmDialog global="true">  
-                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>  
-                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>       
-                    </p:confirmDialog>
+                    <center>
+                        <span style="font-weight: bold; color: darkslateblue">Olá Usuário</span><br/>
+                        <p>Seja Bem vindo ao Sistema de gestão Apogeu</p>
+                        <p>Utilize o a barra de menus acima</p>
+                    </center>
                 </h:form>
             </ui:define>
         </ui:composition>

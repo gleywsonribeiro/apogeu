@@ -6,20 +6,16 @@
 package com.icone.apogeu.controller;
 
 import com.icone.apogeu.model.Classe;
-import com.icone.apogeu.model.Contato;
-import com.icone.apogeu.model.Endereco;
 import com.icone.apogeu.model.Membro;
 import com.icone.apogeu.model.Templo;
 import com.icone.apogeu.model.repository.ClasseFacade;
 import com.icone.apogeu.model.repository.MembroFacade;
 import com.icone.apogeu.model.repository.TemploFacade;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
-import org.primefaces.model.DualListModel;
 
 /**
  *
@@ -32,27 +28,39 @@ public class matriculaController implements Serializable{
     private TemploFacade temploRepository;
     @Inject
     private MembroFacade membroRepository;
+    @Inject
+    private ClasseFacade classeRepository;
     
-    private List<Membro> membrosDisponiveis;
-    private List<Membro> membrosSelecionados;
+    
+    private List<Templo> templos;
+    private List<Membro> membros;
+//    private List<Classe> 
     
     private Templo templo;
     private Classe classe;
-    private List<Templo> templos;
-    
-    private DualListModel<Membro> membros;
-    
+    private Membro membro;
+
     public matriculaController() {
         templo = new Templo();
         classe = new Classe();
-        membros = new DualListModel<Membro>(membrosDisponiveis, membrosSelecionados);
+        membro = new Membro();
     }
     
+    
+    
+    public void matricular() {
+        templos = null;
+    }
+
     public List<Templo> getTemplos() {
         if(templos == null) {
             templos = temploRepository.findAll();
         }
         return templos;
+    }
+
+    public List<Membro> getMembros() {
+        return membros;
     }
 
     public Templo getTemplo() {
@@ -61,7 +69,7 @@ public class matriculaController implements Serializable{
 
     public void setTemplo(Templo templo) {
         this.templo = templo;
-    }
+    } 
 
     public Classe getClasse() {
         return classe;
@@ -71,28 +79,11 @@ public class matriculaController implements Serializable{
         this.classe = classe;
     }
 
-    public DualListModel<Membro> getMembros() {
-        if(membros == null) {
-            membros = new DualListModel<Membro>(getMembrosDisponiveis(), new ArrayList<Membro>());
-        }
-        return membros;
+    public Membro getMembro() {
+        return membro;
     }
 
-    public void setMembros(DualListModel<Membro> membros) {
-        this.membros = membros;
+    public void setMembro(Membro membro) {
+        this.membro = membro;
     }
-
-    public List<Membro> getMembrosDisponiveis() {
-        if(membrosDisponiveis == null) {
-            membrosDisponiveis = membroRepository.getMembrosDisponiveisParaEbd(templo);
-        }
-        return membrosDisponiveis;
-    }
-
-    public List<Membro> getMembrosSelecionados() {
-        return membrosSelecionados;
-    }
-    
-    
-    
 }

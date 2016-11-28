@@ -20,7 +20,7 @@
                         <p:outputLabel value="Templo" for="templo"/>
                         <p:selectOneMenu id="templo" value="#{classeController.classe.templo}" converter="#{temploConverter}" required="true" requiredMessage="Templo deve ser informado">
                             <f:selectItem itemLabel="Selecione"/>
-                            <f:selectItems value="#{temploController.templos}" var="templo" itemLabel="#{templo.nome}" itemValue="#{templo}"/>
+                            <f:selectItems value="#{classeController.templos}" var="templo" itemLabel="#{templo.nome}" itemValue="#{templo}"/>
                             <p:ajax update="professor"/>
                         </p:selectOneMenu>
                     </h:panelGrid>
