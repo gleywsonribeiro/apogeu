@@ -42,7 +42,9 @@
                     <p:separator/>
                     <p:menuitem value="Centro de Custo" outcome="/telas/tabelas/centroCusto"/>
                 </p:submenu>
-                <p:menuitem value="Relatórios" outcome="/telas/relatorios/index" icon="fa fa-clipboard"/>
+                <p:submenu label="Relatórios" icon="fa fa-clipboard">
+                    <p:menuitem value="Templos" action="#{relatorioTemplos.emitir()}" ajax="false"/>
+                </p:submenu>
                 <p:submenu label="configurações" icon="fa fa-wrench">
                     
                 </p:submenu>

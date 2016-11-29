@@ -14,23 +14,23 @@
                     <h:panelGroup id="painel">
                         <h:panelGrid style="float: left">
                             <p:outputLabel value="Templo" for="templo"/>
-                            <p:selectOneMenu id="templo" value="#{matriculaController.templo}" required="true" requiredMessage="Templo deve ser informado">
+                            <p:selectOneMenu id="templo" value="#{matriculaController.templo}" converter="#{temploConverter}" required="true" requiredMessage="Templo deve ser informado">
                                 <f:selectItem itemLabel="Selecione"/>
                                 <f:selectItems value="#{matriculaController.templos}" var="templo" itemLabel="#{templo.nome}" itemValue="#{templo}"/>
-                                <!--<p:ajax update="classe membro"/>-->
-                            </p:selectOneMenu>
-                        </h:panelGrid>
-
-<!--                        <h:panelGrid style="float: left">
-                            <p:outputLabel value="Classe" for="classe"/>
-                            <p:selectOneMenu id="classe" value="" converter="" required="true" requiredMessage="Classe deve ser informada">
-                                <f:selectItem itemLabel="Selecione"/>
-                                <f:selectItems value="#" var="classe" itemLabel="" itemValue=""/>
-                                <p:ajax update="professor"/>
+                                <p:ajax update="classe"/>
                             </p:selectOneMenu>
                         </h:panelGrid>
 
                         <h:panelGrid style="float: left">
+                            <p:outputLabel value="Classe" for="classe"/>
+                            <p:selectOneMenu id="classe" value="#{matriculaController.classe}" required="true" requiredMessage="Classe deve ser informada">
+                                <f:selectItem itemLabel="Selecione"/>
+                                <f:selectItems value="#{matriculaController.templo.classes}" var="classe" itemLabel="#{classe.descricao}" itemValue="#{classe}"/>
+                                <!--<p:ajax update="professor"/>-->
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+
+<!--                        <h:panelGrid style="float: left">
                             <p:outputLabel value="Membro" for="membro"/>
                             <p:selectOneMenu id="membro" value="#" converter="#" required="true" requiredMessage="Membro deve ser informado">
                                 <f:selectItem itemLabel="Selecione"/>
