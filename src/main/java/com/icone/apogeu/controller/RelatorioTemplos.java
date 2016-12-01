@@ -8,6 +8,7 @@ package com.icone.apogeu.controller;
 import com.icone.apogeu.model.Templo;
 import com.icone.apogeu.model.repository.TemploFacade;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -51,9 +52,12 @@ public class RelatorioTemplos {
         try {
             List<Templo> templos = repository.findAll();
             Map<String, Object> parametros = new HashMap<String, Object>();
+            
             String arquivo = "/relatorios/templos.jasper";
+            InputStream relatorioStream = this.getClass().getResourceAsStream(arquivo);
+            
             JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(templos);
-            JasperPrint print = JasperFillManager.fillReport(arquivo, parametros, source);
+            JasperPrint print = JasperFillManager.fillReport(relatorioStream, parametros, source);
             JRExporter exportador = new JRPdfExporter();
             exportador.setParameter(JRExporterParameter.OUTPUT_STREAM, response.getOutputStream());
             exportador.setParameter(JRExporterParameter.JASPER_PRINT, print);
