@@ -28,8 +28,6 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 import net.sf.jasperreports.engine.export.JRPdfExporter;
-import net.sf.jasperreports.view.JasperViewer;
-import org.eclipse.persistence.sessions.Session;
 
 /**
  *
@@ -47,17 +45,21 @@ public class RelatorioTemplos {
 
     @Inject
     TemploFacade repository;
+    
+    @PersistenceContext(unitName = "agenda")
+    private EntityManager em;
 
     public void emitir() {
         try {
             List<Templo> templos = repository.findAll();
             Map<String, Object> parametros = new HashMap<String, Object>();
             
-            String arquivo = "/relatorios/templos.jasper";
+            String arquivo = "/relatorios/templos.jasper2";
             InputStream relatorioStream = this.getClass().getResourceAsStream(arquivo);
             
             JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(templos);
-            JasperPrint print = JasperFillManager.fillReport(relatorioStream, parametros, source);
+            
+            JasperPrint print = JasperFillManager.fillReport(relatorioStream, parametros, em.getc;)
             JRExporter exportador = new JRPdfExporter();
             exportador.setParameter(JRExporterParameter.OUTPUT_STREAM, response.getOutputStream());
             exportador.setParameter(JRExporterParameter.JASPER_PRINT, print);

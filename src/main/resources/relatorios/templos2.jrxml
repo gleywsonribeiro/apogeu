@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="templos2" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0a68d4b4-d331-4d7d-aec1-9262ce6f4e1a">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     templo.`ID` AS templo_ID,
+     templo.`NOME` AS templo_NOME,
+     templo.`CNPJ` AS templo_CNPJ
+FROM
+     `templo` templo
+ORDER BY
+     templo.`ID` ASC]]>
+	</queryString>
+	<field name="templo_ID" class="java.lang.Long"/>
+	<field name="templo_NOME" class="java.lang.String"/>
+	<field name="templo_CNPJ" class="java.lang.String"/>
+	<title>
+		<band height="80" splitType="Stretch">
+			<staticText>
+				<reportElement x="76" y="29" width="414" height="51" forecolor="#663300" uuid="b77c2b69-9063-4fff-99c4-233983a59c6d"/>
+				<textElement textAlignment="Center">
+					<font size="24" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Templos]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="34" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="86" height="20" forecolor="#006666" uuid="e4f8f1aa-45d2-41be-b9ee-0260e3555c9e"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Código]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="86" y="0" width="284" height="20" forecolor="#006666" uuid="90b8f724-fdc9-4f78-9f65-05eb01fd0c0a"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nome]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="370" y="0" width="185" height="20" forecolor="#006666" uuid="bc7682ca-9f98-436c-8919-37ba8f5a434d"/>
+				<textElement>
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CNPJ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="31" width="555" height="1" uuid="af37481d-e1bb-4a88-b2ea-8bdd0effb286"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="86" height="20" uuid="78584e4c-da96-4304-a658-a33887d95b86"/>
+				<textFieldExpression><![CDATA[$F{templo_ID}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="86" y="0" width="284" height="20" uuid="ae008cfa-4368-4b81-b322-1446504208dd"/>
+				<textFieldExpression><![CDATA[$F{templo_NOME}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="370" y="0" width="185" height="20" uuid="0492b577-e677-4380-ad56-a563d9fbad20"/>
+				<textFieldExpression><![CDATA[$F{templo_CNPJ}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+</jasperReport>
