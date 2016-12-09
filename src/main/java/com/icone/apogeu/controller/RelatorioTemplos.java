@@ -57,7 +57,7 @@ public class RelatorioTemplos {
         if (executor.isRelatorioGerado()) {
             facesContext.responseComplete();
         } else {
-            JsfUtil.addErrorMessage("A execução do relatório não retornou dados.");
+            JsfUtil.addFatalMessage("relatorios", "A execução do relatório não retornou dados.");
         }
 
     }
