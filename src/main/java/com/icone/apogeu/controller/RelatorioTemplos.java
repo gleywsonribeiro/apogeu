@@ -7,8 +7,9 @@ package com.icone.apogeu.controller;
 
 import com.icone.apogeu.model.Templo;
 import com.icone.apogeu.model.repository.TemploFacade;
-import java.io.IOException;
-import java.io.InputStream;
+import com.icone.apogeu.util.jsf.JsfUtil;
+import com.icone.apogeu.util.report.ExecutorRelatorio;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,16 +19,8 @@ import javax.inject.Named;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.servlet.http.HttpServletResponse;
-import net.sf.jasperreports.engine.JRException;
-import net.sf.jasperreports.engine.JRExporter;
-import net.sf.jasperreports.engine.JRExporterParameter;
-import net.sf.jasperreports.engine.JasperFillManager;
-import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
-import net.sf.jasperreports.engine.export.JRPdfExporter;
 
 /**
  *
@@ -45,34 +38,26 @@ public class RelatorioTemplos {
 
     @Inject
     TemploFacade repository;
-    
-    @PersistenceContext(unitName = "agenda")
-    private EntityManager em;
 
     public void emitir() {
+        Map<String, Object> parametros = new HashMap<String, Object>();
+
+        ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/templos.jasper", this.response, parametros, "Templos.pdf");
+
+        List<Templo> templos = repository.findAll();
+        
+        JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(templos);
+        
         try {
-            List<Templo> templos = repository.findAll();
-            Map<String, Object> parametros = new HashMap<String, Object>();
-            
-            String arquivo = "/relatorios/templos.jasper2";
-            InputStream relatorioStream = this.getClass().getResourceAsStream(arquivo);
-            
-            JRBeanCollectionDataSource source = new JRBeanCollectionDataSource(templos);
-            
-            JasperPrint print = JasperFillManager.fillReport(relatorioStream, parametros, em.getc;)
-            JRExporter exportador = new JRPdfExporter();
-            exportador.setParameter(JRExporterParameter.OUTPUT_STREAM, response.getOutputStream());
-            exportador.setParameter(JRExporterParameter.JASPER_PRINT, print);
-
-            response.setContentType("application/pdf");
-            response.setHeader("Content-Disposition", "attachment; filename=\""
-                    + arquivo + "\"");
-
-            exportador.exportReport();
-        } catch (JRException ex) {
+            executor.execute(source);
+        } catch (SQLException ex) {
             Logger.getLogger(RelatorioTemplos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(RelatorioTemplos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        if (executor.isRelatorioGerado()) {
+            facesContext.responseComplete();
+        } else {
+            JsfUtil.addErrorMessage("A execução do relatório não retornou dados.");
         }
 
     }
