@@ -11,22 +11,22 @@
 FROM
      `apogeu`.`templo` t]]>
 	</queryString>
-	<field name="id" class="java.lang.Long">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="cnpj" class="java.lang.String">
+		<fieldDescription><![CDATA[cnpj]]></fieldDescription>
 	</field>
 	<field name="nome" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+		<fieldDescription><![CDATA[nome]]></fieldDescription>
 	</field>
-	<field name="cnpj" class="java.lang.String">
-		<fieldDescription><![CDATA[]]></fieldDescription>
+	<field name="id" class="java.lang.Long">
+		<fieldDescription><![CDATA[id]]></fieldDescription>
 	</field>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="50" splitType="Stretch">
+		<band height="70" splitType="Stretch">
 			<staticText>
-				<reportElement x="114" y="12" width="340" height="38" uuid="0531817b-3d91-4047-8801-ea253f24dcbc"/>
+				<reportElement x="114" y="2" width="340" height="38" forecolor="#CC0000" uuid="0531817b-3d91-4047-8801-ea253f24dcbc"/>
 				<textElement textAlignment="Center">
 					<font size="24" isBold="true"/>
 				</textElement>
@@ -35,42 +35,54 @@ FROM
 		</band>
 	</title>
 	<columnHeader>
-		<band height="28" splitType="Stretch">
+		<band height="26" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="185" height="20" forecolor="#FF3300" uuid="0cf486fa-c906-4860-babd-51683b37b009"/>
+				<reportElement x="0" y="0" width="67" height="20" forecolor="#FF3300" uuid="0cf486fa-c906-4860-babd-51683b37b009"/>
 				<textElement>
-					<font size="12" isBold="true"/>
+					<font fontName="Lucida Calligraphy" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Código]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="185" y="0" width="185" height="20" forecolor="#FF3300" uuid="01796b6f-89b3-4415-9e4b-0fab48f0643e"/>
+				<reportElement x="67" y="0" width="185" height="20" forecolor="#FF3300" uuid="01796b6f-89b3-4415-9e4b-0fab48f0643e"/>
 				<textElement>
-					<font size="12" isBold="true"/>
+					<font fontName="Lucida Calligraphy" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[Nome]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="370" y="0" width="185" height="20" forecolor="#FF3300" uuid="5aa710b7-c505-4a5d-95b6-e0e9af99bb5b"/>
+				<reportElement x="252" y="0" width="185" height="20" forecolor="#FF3300" uuid="5aa710b7-c505-4a5d-95b6-e0e9af99bb5b"/>
 				<textElement>
-					<font size="12" isBold="true"/>
+					<font fontName="Lucida Calligraphy" size="12" isBold="true"/>
 				</textElement>
 				<text><![CDATA[CNPJ]]></text>
 			</staticText>
+			<line>
+				<reportElement x="0" y="20" width="555" height="1" uuid="2f0e7e97-5f2f-4fed-9393-97de65983a2e"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>
 		<band height="22" splitType="Stretch">
 			<textField>
-				<reportElement x="0" y="0" width="185" height="20" uuid="248dded2-b8df-4f0b-b4e6-25267b74f7b2"/>
+				<reportElement x="0" y="0" width="67" height="20" uuid="248dded2-b8df-4f0b-b4e6-25267b74f7b2"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="185" y="0" width="185" height="20" uuid="bc326042-b7e5-4e00-8225-914d873b0d81"/>
+				<reportElement x="67" y="0" width="185" height="20" uuid="bc326042-b7e5-4e00-8225-914d873b0d81"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement x="370" y="0" width="185" height="20" uuid="a7528e9e-1aa9-49f9-b9ac-524d711490dc"/>
+				<reportElement x="252" y="0" width="185" height="20" uuid="a7528e9e-1aa9-49f9-b9ac-524d711490dc"/>
+				<textElement>
+					<font fontName="Lucida Calligraphy"/>
+				</textElement>
 				<textFieldExpression><![CDATA[$F{cnpj}]]></textFieldExpression>
 			</textField>
 		</band>
