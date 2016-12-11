@@ -26,19 +26,19 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
  *
  * @author raque
  */
-@Named(value = "relatorioMembros")
+@Named(value = "relatorioMembroController")
 @RequestScoped
-public class RelatorioMembros {
-
-    @Inject
+public class RelatorioMembroController {
+     @Inject
     private FacesContext facesContext;
 
     @Inject
     private HttpServletResponse response;
     
+    @Inject
     private MembroFacade repositorio;
-    
-    public void emitir() {
+   
+     public void emitir() {
         Map<String, Object> parametros = new HashMap<String, Object>();
 
         ExecutorRelatorio executor = new ExecutorRelatorio("/relatorios/membros.jasper", this.response, parametros, "Membros por Templos.pdf");
@@ -50,7 +50,7 @@ public class RelatorioMembros {
         try {
             executor.execute(source);
         } catch (SQLException ex) {
-            Logger.getLogger(RelatorioMembros.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(RelatorioMembroController.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         if (executor.isRelatorioGerado()) {
@@ -59,4 +59,5 @@ public class RelatorioMembros {
             JsfUtil.addFatalMessage("relatorios", "A execução do relatório não retornou dados.");
         }
     }
+    
 }
