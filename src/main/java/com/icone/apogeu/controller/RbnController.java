@@ -5,7 +5,9 @@
  */
 package com.icone.apogeu.controller;
 
+import com.icone.apogeu.model.Membro;
 import com.icone.apogeu.model.Rbn;
+import com.icone.apogeu.model.repository.MembroFacade;
 import com.icone.apogeu.model.repository.RbnFacade;
 import com.icone.apogeu.util.jsf.JsfUtil;
 import java.io.Serializable;
@@ -28,6 +30,9 @@ public class RbnController implements Serializable{
     private Rbn rbn;
     private List<Rbn> rbns;
     private List<Rbn> rbnsPendentes;
+    
+    @Inject
+    private MembroFacade membroRepository;
 
     public RbnController() {
         inicializar();
@@ -59,6 +64,10 @@ public class RbnController implements Serializable{
         repositorio.remove(rbn);
         inicializar();
         JsfUtil.addMessage("Cancelado com sucesso!");
+    }
+    
+    public List<Membro> completarMembros(String nome) {
+        return membroRepository.getMembrosPorNome(nome);
     }
 
     public List<Rbn> getRbnsPendentes() {

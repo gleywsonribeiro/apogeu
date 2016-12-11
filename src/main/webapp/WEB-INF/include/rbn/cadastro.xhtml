@@ -24,10 +24,13 @@
                              required="true" requiredMessage="Nome da campanha precisa ser informado"/>
                 
                 <p:outputLabel value="Contribuinte" for="contribuinte"/>
-                <p:selectOneMenu id="contribuinte" value="#{rbnController.rbn.membro}" converter="#{membroConverter}" required="true" requiredMessage="Escolha um membro">
-                    <f:selectItem itemLabel="Selecione"/>
-                    <f:selectItems value="#{membroController.membros}" var="membro" itemLabel="#{membro.nome}" itemValue="#{membro}"/>
-                </p:selectOneMenu>
+                <p:autoComplete value="#{rbnController.rbn.membro}" converter="#{membroConverter}"
+                                var="membro" itemLabel="#{membro.nome}" itemValue="#{membro}"
+                                completeMethod="#{rbnController.completarMembros}"
+                                forceSelection="true" id="contribuinte"
+                                required="true" requiredMessage="Escolha um membro">
+                
+                </p:autoComplete>
             </h:panelGrid>
             <p:commandButton style="margin-right: 5px" value="Salvar" action="#{rbnController.salvar()}" update="rbnTable formulario"/>
             <p:commandButton value="Confirmar Pagamento" action="#{rbnController.confirmarPagamento()}" update="rbnTable formulario"/>

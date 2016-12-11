@@ -38,4 +38,9 @@ public class MembroFacade extends AbstractFacade<Membro> {
         
         return query.getResultList();
     }
+    
+    public List<Membro> getMembrosPorNome(String nome) { //from Membro upper(nome) like :nome
+        return getEntityManager().createQuery("SELECT m FROM Membro AS m WHERE UPPER(m.nome) LIKE :nome", Membro.class)
+                .setParameter("nome", nome.toUpperCase() + "%").getResultList();
+    }
 }
